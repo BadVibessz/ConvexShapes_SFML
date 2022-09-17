@@ -2,7 +2,7 @@
 #include "my_extensions.h"
 #include <iostream>
 
-#include "Triangle.h"
+#include "triangle_decorator.h"
 
 vector<vector<string>> FileManager::ReadInput()
 {
@@ -21,4 +21,13 @@ vector<vector<string>> FileManager::ReadInput()
 				vec.push_back(MyExtensions::Split(line, ' '));
 	}
 	return vec;
+}
+
+void FileManager::SaveData(vector<string> data)
+{
+	ofstream output;
+	output.open(path_to_output);
+
+	for (auto str : data)
+		output << str << endl;
 }

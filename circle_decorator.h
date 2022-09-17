@@ -4,16 +4,14 @@
 #include "figure.h"
 #include "Point.h"
 
-class Circle : Figure
+class CircleDecorator : public Figure
 {
 public:
-	Point p;
-	int radius;
-
-	Circle();
-	Circle(Point p, int radius);
+	CircleDecorator(CircleShape* circle_shape);
 
 	double Area() override;
 	double Perimeter() override;
+
+	void SetRadius(float rad);
 };
 

@@ -143,24 +143,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="circle.cpp" />
+    <ClCompile Include="circle_decorator.cpp" />
     <ClCompile Include="drawer.cpp" />
+    <ClCompile Include="figure.cpp" />
     <ClCompile Include="file_manager.cpp" />
     <ClCompile Include="my_extensions.cpp" />
     <ClCompile Include="point.cpp" />
-    <ClCompile Include="rectangle.cpp" />
+    <ClCompile Include="rectangle_decorator.cpp" />
     <ClCompile Include="SMFL.cpp" />
-    <ClCompile Include="triangle.cpp" />
+    <ClCompile Include="triangle_decorator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="circle.h" />
+    <ClInclude Include="circle_decorator.h" />
     <ClInclude Include="drawer.h" />
     <ClInclude Include="figure.h" />
     <ClInclude Include="file_manager.h" />
     <ClInclude Include="my_extensions.h" />
     <ClInclude Include="point.h" />
-    <ClInclude Include="rectangle.h" />
-    <ClInclude Include="triangle.h" />
+    <ClInclude Include="rectangle_decorator.h" />
+    <ClInclude Include="triangle_decorator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

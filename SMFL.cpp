@@ -14,12 +14,6 @@ int main()
 
 	RenderWindow window(VideoMode(window_width, window_height), "SFML works!");
 
-	/*View view; //todo: move origin to center of the screen
-	view.move(window_width / 2, window_height / 2);
-	view.setCenter(window_width / 2, window_height / 2);
-	view.setSize(window_width, window_height);
-	window.setView(view);*/
-
 	Drawer drawer = Drawer(&window, window_width, window_width);
 
 	ContextSettings settings;
@@ -45,14 +39,6 @@ int main()
 
 		drawer.DrawFiguresFromFIle();
 
-		/*ConvexShape triangle(3);
-		triangle.setPoint(0, Vector2f(0, 0));
-		triangle.setPoint(1, Vector2f(100, 0));
-		triangle.setPoint(2, Vector2f(100, 100));
-
-		triangle.setFillColor(Color(0,0,255));
-
-		window.draw(triangle);*/
 		window.display();
 	}
 }

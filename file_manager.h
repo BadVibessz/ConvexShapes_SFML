@@ -2,7 +2,6 @@
 #include <string>
 #include <fstream>
 #include <vector>
-
 #include "figure.h"
 
 using namespace std;
@@ -14,5 +13,6 @@ class FileManager
 {
 public:
 	static vector<vector<string>> ReadInput();
+	static void SaveData(vector<string> data);
 };
 

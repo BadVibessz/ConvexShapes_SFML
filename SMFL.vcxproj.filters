@@ -24,16 +24,16 @@
     <ClCompile Include="SMFL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="circle.cpp">
+    <ClCompile Include="circle_decorator.cpp">
       <Filter>Source Files\Calculations</Filter>
     </ClCompile>
     <ClCompile Include="point.cpp">
       <Filter>Source Files\Calculations</Filter>
     </ClCompile>
-    <ClCompile Include="rectangle.cpp">
+    <ClCompile Include="rectangle_decorator.cpp">
       <Filter>Source Files\Calculations</Filter>
     </ClCompile>
-    <ClCompile Include="triangle.cpp">
+    <ClCompile Include="triangle_decorator.cpp">
       <Filter>Source Files\Calculations</Filter>
     </ClCompile>
     <ClCompile Include="drawer.cpp">
@@ -45,12 +45,15 @@
     <ClCompile Include="my_extensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="figure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="circle.h">
+    <ClInclude Include="circle_decorator.h">
       <Filter>Header Files\Calculations</Filter>
     </ClInclude>
     <ClInclude Include="figure.h">
@@ -59,10 +62,10 @@
     <ClInclude Include="point.h">
       <Filter>Header Files\Calculations</Filter>
     </ClInclude>
-    <ClInclude Include="rectangle.h">
+    <ClInclude Include="rectangle_decorator.h">
       <Filter>Header Files\Calculations</Filter>
     </ClInclude>
-    <ClInclude Include="triangle.h">
+    <ClInclude Include="triangle_decorator.h">
       <Filter>Header Files\Calculations</Filter>
     </ClInclude>
     <ClInclude Include="file_manager.h">
