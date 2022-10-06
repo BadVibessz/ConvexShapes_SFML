@@ -1,9 +1,9 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "my_extensions.h"
-
 #include "drawer.h"
 #include "file_manager.h"
+#include "event_handler.h"
 
 using namespace sf;
 
@@ -13,15 +13,21 @@ int main()
 	const int window_height = 900;
 
 	RenderWindow window(VideoMode(window_width, window_height), "SFML works!");
+	window.setFramerateLimit(60); // without this line cpu and gpu usage shoots up
 
-	Drawer drawer = Drawer(&window, window_width, window_width);
+
+	Drawer drawer = Drawer(&window);
 
 	ContextSettings settings;
 	settings.antialiasingLevel = 8;
 
 
-	auto manager = FileManager();
-	
+	EventHandler::SetWindow(&window);
+
+	auto figures = FileManager::ReadInput();
+	EventHandler::SetShapes(figures);
+	FileManager::SaveData(figures);
+
 
 	while (window.isOpen())
 	{
@@ -30,15 +36,16 @@ int main()
 		{
 			if (event.type == Event::Closed)
 				window.close();
+			else
+				EventHandler::HandleEvent(event);
 		}
 
 		window.clear(Color(255, 255, 255));
 		drawer.DrawAxis(Color(0, 0, 0));
-
-		auto vec = manager.ReadInput();
-
-		drawer.DrawFiguresFromFIle();
-
+		drawer.DrawFigures(figures);
 		window.display();
 	}
+
+	
+
 }

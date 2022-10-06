@@ -12,7 +12,7 @@ static const string path_to_output = "output.txt";
 class FileManager
 {
 public:
-	static vector<vector<string>> ReadInput();
-	static void SaveData(vector<string> data);
+	static vector<Figure*> ReadInput();
+	static void SaveData(vector<Figure*> figures);
 };
 

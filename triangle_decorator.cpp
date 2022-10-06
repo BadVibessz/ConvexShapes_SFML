@@ -3,6 +3,12 @@
 TriangleDecorator::TriangleDecorator(ConvexShape* triangle_shape)
 {
 	_shape = triangle_shape;
+
+
+	/*float w = this->_shape->getGlobalBounds().width;
+	float h = this->_shape->getGlobalBounds().height;
+	this->_shape->setOrigin(w / 2, h / 2);*/
+
 }
 
 double TriangleDecorator::Area()
@@ -26,6 +32,11 @@ double TriangleDecorator::Perimeter()
 	auto p3 = Point(((ConvexShape*)_shape)->getPoint(2).x, ((ConvexShape*)_shape)->getPoint(2).y);
 
 	return p1.length(p2) + p1.length(p3) + p2.length(p3);
+}
+
+std::string TriangleDecorator::GetType()
+{
+	return "Triangle";
 }
 
 void TriangleDecorator::SetPointCount(int count)

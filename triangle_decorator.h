@@ -9,6 +9,7 @@ public:
 
 	double Area() override;
 	double Perimeter() override;
+	std::string GetType() override;
 
 	void SetPointCount(int count);
 	void SetPoint(int i, Vector2f point);

@@ -40,6 +40,7 @@ int MyExtensions::Random(int a, int b)
 	return a + rand() % (abs(a) + b);
 }
 
+
 //
 //template <typename Out>
 //void split(const std::string& s, char delim, Out result)

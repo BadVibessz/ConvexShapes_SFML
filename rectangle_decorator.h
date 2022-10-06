@@ -9,6 +9,7 @@ public:
 
 	double  Area() override;
 	double Perimeter() override;
+	std::string GetType() override;
 	
 	void SetSize(Vector2f vec);
 

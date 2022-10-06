@@ -19,60 +19,117 @@
     <Filter Include="Header Files\Calculations">
       <UniqueIdentifier>{09696fef-f25b-4620-a324-40ed4beb1eaf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Factories">
+      <UniqueIdentifier>{65051c50-192b-4d37-b2ae-75e9f5e05a2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Decorators">
+      <UniqueIdentifier>{8ca83083-54ca-4d45-84a2-7c432a3ecfd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Decorators">
+      <UniqueIdentifier>{6ae45e5f-12f6-4e41-83d9-13ecc4a9bf2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Extensions">
+      <UniqueIdentifier>{9212d2ee-943c-4569-8a49-c49464c9c13c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Extensions">
+      <UniqueIdentifier>{cb5baf6a-b507-41eb-98f3-f3e7d074f8f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Factories">
+      <UniqueIdentifier>{61db28b8-8a7d-4156-bbb7-234c55f7aae2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Handlers">
+      <UniqueIdentifier>{5a136d58-4c8e-433f-9bbd-c4dc9be17f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Handlers">
+      <UniqueIdentifier>{e6e2a410-350f-4028-bb1a-faea7ea80c0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SMFL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="circle_decorator.cpp">
-      <Filter>Source Files\Calculations</Filter>
-    </ClCompile>
     <ClCompile Include="point.cpp">
-      <Filter>Source Files\Calculations</Filter>
-    </ClCompile>
-    <ClCompile Include="rectangle_decorator.cpp">
-      <Filter>Source Files\Calculations</Filter>
-    </ClCompile>
-    <ClCompile Include="triangle_decorator.cpp">
       <Filter>Source Files\Calculations</Filter>
     </ClCompile>
     <ClCompile Include="drawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="file_manager.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="rectangle_factory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
-    <ClCompile Include="my_extensions.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="circle_factory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_decorator.cpp">
+      <Filter>Source Files\Decorators</Filter>
+    </ClCompile>
+    <ClCompile Include="circle_decorator.cpp">
+      <Filter>Source Files\Decorators</Filter>
+    </ClCompile>
+    <ClCompile Include="rectangle_decorator.cpp">
+      <Filter>Source Files\Decorators</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_factory.cpp">
+      <Filter>Source Files\Factories</Filter>
     </ClCompile>
     <ClCompile Include="figure.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Decorators</Filter>
+    </ClCompile>
+    <ClCompile Include="file_manager.cpp">
+      <Filter>Source Files\Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="my_extensions.cpp">
+      <Filter>Source Files\Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="event_handler.cpp">
+      <Filter>Source Files\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="grouped_figure.cpp">
+      <Filter>Source Files\Decorators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="drawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="circle_decorator.h">
-      <Filter>Header Files\Calculations</Filter>
-    </ClInclude>
-    <ClInclude Include="figure.h">
-      <Filter>Header Files\Calculations</Filter>
-    </ClInclude>
     <ClInclude Include="point.h">
       <Filter>Header Files\Calculations</Filter>
     </ClInclude>
+    <ClInclude Include="figure_factory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="circle_factory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle_factory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_factory.h">
+      <Filter>Header Files\Factories</Filter>
+    </ClInclude>
     <ClInclude Include="rectangle_decorator.h">
-      <Filter>Header Files\Calculations</Filter>
+      <Filter>Header Files\Decorators</Filter>
     </ClInclude>
     <ClInclude Include="triangle_decorator.h">
-      <Filter>Header Files\Calculations</Filter>
+      <Filter>Header Files\Decorators</Filter>
     </ClInclude>
-    <ClInclude Include="file_manager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="circle_decorator.h">
+      <Filter>Header Files\Decorators</Filter>
+    </ClInclude>
+    <ClInclude Include="figure.h">
+      <Filter>Header Files\Decorators</Filter>
     </ClInclude>
     <ClInclude Include="my_extensions.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="file_manager.h">
+      <Filter>Header Files\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="event_handler.h">
+      <Filter>Header Files\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="grouped_figure.h">
+      <Filter>Header Files\Decorators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

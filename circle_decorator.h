@@ -11,6 +11,7 @@ public:
 
 	double Area() override;
 	double Perimeter() override;
+	std::string GetType() override;
 
 	void SetRadius(float rad);
 };

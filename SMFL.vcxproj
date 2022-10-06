@@ -144,24 +144,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="circle_decorator.cpp" />
+    <ClCompile Include="circle_factory.cpp" />
     <ClCompile Include="drawer.cpp" />
+    <ClCompile Include="event_handler.cpp" />
     <ClCompile Include="figure.cpp" />
     <ClCompile Include="file_manager.cpp" />
+    <ClCompile Include="grouped_figure.cpp" />
     <ClCompile Include="my_extensions.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="rectangle_decorator.cpp" />
+    <ClCompile Include="rectangle_factory.cpp" />
     <ClCompile Include="SMFL.cpp" />
     <ClCompile Include="triangle_decorator.cpp" />
+    <ClCompile Include="triangle_factory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="circle_decorator.h" />
+    <ClInclude Include="circle_factory.h" />
     <ClInclude Include="drawer.h" />
+    <ClInclude Include="event_handler.h" />
     <ClInclude Include="figure.h" />
+    <ClInclude Include="figure_factory.h" />
     <ClInclude Include="file_manager.h" />
+    <ClInclude Include="grouped_figure.h" />
     <ClInclude Include="my_extensions.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="rectangle_decorator.h" />
+    <ClInclude Include="rectangle_factory.h" />
     <ClInclude Include="triangle_decorator.h" />
+    <ClInclude Include="triangle_factory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
