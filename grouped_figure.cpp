@@ -38,7 +38,7 @@ void GroupedFigure::DeleteFigure(Figure* figure)
 		_figures.erase(it);
 }
 
-vector<Figure*> GroupedFigure::GetShapes()
+vector<Figure*> GroupedFigure::GetFigures()
 {
 	return _figures;
 }
@@ -46,10 +46,47 @@ vector<Figure*> GroupedFigure::GetShapes()
 void GroupedFigure::Highlight()
 {
 	for (auto figure : _figures)
-			figure->Highlight();
+		figure->Highlight();
 }
 
 bool GroupedFigure::IsHighlighted()
 {
 	return _figures.front()->IsHighlighted();
+}
+
+bool GroupedFigure::ContainsPoint(Vector2f point)
+{
+	for (auto figure : _figures)
+		if (figure->ContainsPoint(point))
+			return true;
+	return false;
+}
+
+Figure* GroupedFigure::GetFigureThatContainsPoint(Vector2f point)
+{
+	Figure* figure = nullptr;
+
+	for (auto fig : _figures)
+	{
+		if (fig->GetType() == "Grouped")
+		{
+			for (auto grouped : ((GroupedFigure*)fig)->GetFigures())
+			{
+				if (grouped->ContainsPoint(point))
+					figure = grouped;
+			}
+		}
+		else
+		{
+			if (fig->ContainsPoint(point))
+				return fig;
+		}
+
+	}
+
+	while (figure->GetType() == "Grouped")
+		figure = GetFigureThatContainsPoint(point);
+
+
+	return figure;
 }

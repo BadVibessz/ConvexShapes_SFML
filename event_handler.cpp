@@ -13,7 +13,7 @@ void EventHandler::SetShapes(vector<Figure*> figures)
 
 void EventHandler::HandleEvent(Event e)
 {
-	auto mouse_position = Mouse::getPosition(*_window);
+	auto mouse_position = _window->mapPixelToCoords(Mouse::getPosition(*_window));
 	float dx = 0, dy = 0;
 
 	switch (e.type)
@@ -56,7 +56,7 @@ void EventHandler::HandleEvent(Event e)
 
 				if (selected_figures.size() == 1 && selected_figures.back()->GetType() == "Grouped")
 				{
-					auto grouped_figures = ((GroupedFigure*)selected_figures.back())->GetShapes();
+					auto grouped_figures = ((GroupedFigure*)selected_figures.back())->GetFigures();
 
 					auto it = find(_figures.begin(), _figures.end(), selected_figures.back());
 
@@ -78,43 +78,27 @@ void EventHandler::HandleEvent(Event e)
 		break;
 
 	case Event::MouseButtonPressed:
-		if (e.key.code == Mouse::Left) // todo: draw rectangle not only change outline color!
+		if (e.key.code == Mouse::Left)
 		{
 			for (auto figure : _figures)
 			{
-				if (figure->GetType() == "Grouped")
-				{
-					auto grouped_shapes = ((GroupedFigure*)figure)->GetShapes();
-
-					for (auto elem : grouped_shapes)
-						if (elem->GetShape()->getGlobalBounds().contains(mouse_position.x, mouse_position.y))
-						{
-							((GroupedFigure*)figure)->Highlight();
-							figure = elem;
-							figure->Highlight();
-							_is_multi_select = true;
-							break;
-						}
-
-				}
-
-				if (figure->GetShape()->getGlobalBounds().contains(mouse_position.x, mouse_position.y))
+				if (figure->ContainsPoint(Vector2f(mouse_position.x, mouse_position.y)))
 				{
 					if (!_is_multi_select)
 						for (auto fig : _figures)
 							if (fig->IsHighlighted() && fig != figure) fig->Highlight();
 
-					_is_multi_select = false;
-
 					figure->Highlight();
-
 					_is_moving = true;
-					_selected_figure = figure;
+
+					if (figure->GetType() == "Grouped")
+						_selected_figure = ((GroupedFigure*)figure)->
+						GetFigureThatContainsPoint(Vector2f(mouse_position.x, mouse_position.y));
+					else _selected_figure = figure;
+
 
 					dx = mouse_position.x - _selected_figure->GetShape()->getPosition().x;
 					dy = mouse_position.y - _selected_figure->GetShape()->getPosition().y;
-					/*dx =_selected_figure->GetShape()->getPosition().x;
-					dy = _selected_figure->GetShape()->getPosition().y;*/
 
 					break;
 				}

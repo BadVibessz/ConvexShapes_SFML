@@ -17,9 +17,11 @@ public:
 	std::string GetType() override;
 	void AddFigure(Figure* figure);
 	void DeleteFigure(Figure* figure);
-	vector<Figure*> GetShapes();
+	vector<Figure*> GetFigures();
 	void Highlight() override;
 	bool IsHighlighted() override;
+	bool ContainsPoint(Vector2f point) override;
+	Figure* GetFigureThatContainsPoint(Vector2f point);
 
 };
 

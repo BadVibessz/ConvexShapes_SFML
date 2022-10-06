@@ -10,6 +10,12 @@ TriangleFactory::TriangleFactory(Vector2f p1, Vector2f p2, Vector2f p3, Color co
 	triangle->SetPoint(2, Vector2f(p3.x, p3.y));
 	triangle->SetFillColor(color);
 
+	auto shape = triangle->GetShape();
+
+	float w = shape->getGlobalBounds().width;
+	float h = shape->getGlobalBounds().height;
+	shape->setOrigin(w / 2, h / 2);
+
 	this->_triangle_decorator = triangle;
 }
 

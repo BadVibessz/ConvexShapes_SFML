@@ -64,6 +64,11 @@ Shape* Figure::GetShape()
 }
 
 
+bool Figure::ContainsPoint(Vector2f point)
+{
+	return _shape->getGlobalBounds().contains(point);
+}
+
 void Figure::Draw(RenderWindow& window)
 {
 	window.draw(*this->_shape);

@@ -2,7 +2,7 @@
 
 Figure* CircleFactory::GetFigure()
 {
-    return _circle_decorator;
+	return _circle_decorator;
 }
 
 CircleFactory::CircleFactory(Vector2f origin, int radius, Color color)
@@ -11,6 +11,12 @@ CircleFactory::CircleFactory(Vector2f origin, int radius, Color color)
 	circle->SetPosition(Vector2f(origin.x, origin.y));
 	circle->SetRadius(radius);
 	circle->SetFillColor(Color(0, 0, 255, 100));
+
+	auto shape = circle->GetShape();
+
+	float w = shape->getGlobalBounds().width;
+	float h = shape->getGlobalBounds().height;
+	shape->setOrigin(w / 2, h / 2);
 
 	this->_circle_decorator = circle;
 

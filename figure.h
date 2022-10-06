@@ -14,6 +14,7 @@ protected:
 public:
 	virtual double Area() = 0;
 	virtual double Perimeter() = 0;
+	virtual bool ContainsPoint(Vector2f point);
 
 	virtual std::string GetType() = 0;
 
