@@ -27,26 +27,17 @@ void Figure::Highlight()
 		_rectangle->setOutlineColor(Color::Transparent);
 	}
 
-	if (_is_highlighted) // todo: draw rectangle not only change outline color!
+	if (_is_highlighted) 
 	{
-
 		_is_highlighted = false;
 
 		_rectangle->setOutlineColor(Color::Transparent);
-
-		/*_shape->setOutlineThickness(2);
-		_shape->setOutlineColor(Color::Black);*/
-
 	}
 	else
 	{
 		_is_highlighted = true;
 
 		_rectangle->setOutlineColor(Color::Red);
-
-
-		/*_shape->setOutlineThickness(5);
-		_shape->setOutlineColor(Color::Red);*/
 	}
 
 
@@ -67,6 +58,16 @@ Shape* Figure::GetShape()
 bool Figure::ContainsPoint(Vector2f point)
 {
 	return _shape->getGlobalBounds().contains(point);
+}
+
+FloatRect Figure::GetGlobalBounds()
+{
+	return this->_shape->getGlobalBounds();
+}
+
+Vector2f Figure::GetPosition()
+{
+	return this->_shape->getPosition();
 }
 
 void Figure::Draw(RenderWindow& window)

@@ -22,11 +22,13 @@ int main()
 	settings.antialiasingLevel = 8;
 
 
-	EventHandler::SetWindow(&window);
 
 	auto figures = FileManager::ReadInput();
-	EventHandler::SetShapes(figures);
 	FileManager::SaveData(figures);
+
+	EventHandler::SetWindow(&window);
+	EventHandler::SetShapes(figures);
+
 
 
 	while (window.isOpen())
@@ -37,15 +39,13 @@ int main()
 			if (event.type == Event::Closed)
 				window.close();
 			else
-				EventHandler::HandleEvent(event);
+				EventHandler::HandleEvent(event, drawer);
 		}
 
 		window.clear(Color(255, 255, 255));
 		drawer.DrawAxis(Color(0, 0, 0));
 		drawer.DrawFigures(figures);
+
 		window.display();
 	}
-
-	
-
 }

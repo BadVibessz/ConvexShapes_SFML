@@ -15,12 +15,14 @@ public:
 	virtual double Area() = 0;
 	virtual double Perimeter() = 0;
 	virtual bool ContainsPoint(Vector2f point);
+	virtual FloatRect GetGlobalBounds();
+	virtual Vector2f GetPosition();
 
 	virtual std::string GetType() = 0;
 
 	void Draw(RenderWindow& window);
 	void SetFillColor(Color color);
-	void SetPosition(Vector2f position);
+	virtual void SetPosition(Vector2f position) ;
 
 	virtual void Highlight();
 	virtual bool IsHighlighted();

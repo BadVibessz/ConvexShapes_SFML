@@ -2,6 +2,8 @@
 #include <vector>
 #include "figure.h"
 #include "grouped_figure.h"
+#include "drawer.h"
+
 
 using namespace sf;
 using namespace std;
@@ -14,10 +16,11 @@ private:
 	static bool _is_multi_select;
 	static bool _is_moving;
 	static Figure* _selected_figure;
+	static float _dx, _dy;
 
 public:
 	static void SetShapes(vector <Figure*> figures);
-	static void HandleEvent(Event e);
+	static void HandleEvent(Event e, Drawer drawer);
 	static void SetWindow(RenderWindow* window);
 
 };

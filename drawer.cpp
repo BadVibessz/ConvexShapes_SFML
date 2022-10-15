@@ -36,6 +36,11 @@ void Drawer::DrawAxis(Color color)
 	DrawLine(Point(width / 2, 0), Point(width / 2, height), color);
 }
 
+void Drawer::DrawFigure(Figure* figure)
+{
+	figure->Draw(*_window);
+}
+
 
 void Drawer::DrawFigures(vector<Figure*> figures)
 {
@@ -43,8 +48,5 @@ void Drawer::DrawFigures(vector<Figure*> figures)
 		DrawFigure(figure);
 }
 
-void Drawer::DrawFigure(Figure* figure)
-{
-	figure->Draw(*_window);
-}
+
 

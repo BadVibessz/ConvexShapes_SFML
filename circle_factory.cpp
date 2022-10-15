@@ -10,7 +10,7 @@ CircleFactory::CircleFactory(Vector2f origin, int radius, Color color)
 	auto circle = new CircleDecorator(new CircleShape());
 	circle->SetPosition(Vector2f(origin.x, origin.y));
 	circle->SetRadius(radius);
-	circle->SetFillColor(Color(0, 0, 255, 100));
+	circle->SetFillColor(color);
 
 	auto shape = circle->GetShape();
 
