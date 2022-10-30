@@ -3,9 +3,16 @@
 void Figure::SetFillColor(Color color)
 {
 	this->_shape->setFillColor(color);
+}
 
-	this->_shape->setOutlineThickness(2);
-	this->_shape->setOutlineColor(Color(0, 0, 0));
+void Figure::SetOutlineColor(Color color)
+{
+	this->_shape->setOutlineColor(color);
+}
+
+void Figure::SetOutlineThickness(float thickness)
+{
+	this->_shape->setOutlineThickness(thickness);
 }
 
 void Figure::SetPosition(Vector2f pos)

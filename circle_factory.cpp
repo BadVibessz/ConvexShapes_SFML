@@ -5,12 +5,14 @@ Figure* CircleFactory::GetFigure()
 	return _circle_decorator;
 }
 
-CircleFactory::CircleFactory(Vector2f origin, int radius, Color color)
+CircleFactory::CircleFactory(Vector2f origin, int radius, Color color, Color outlineColor, float outlineThickness)
 {
 	auto circle = new CircleDecorator(new CircleShape());
 	circle->SetPosition(Vector2f(origin.x, origin.y));
 	circle->SetRadius(radius);
 	circle->SetFillColor(color);
+	circle->SetOutlineColor(outlineColor);
+	circle->SetOutlineThickness(outlineThickness);
 
 	auto shape = circle->GetShape();
 

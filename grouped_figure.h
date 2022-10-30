@@ -9,7 +9,6 @@ class GroupedFigure : public Figure
 {
 private:
 	vector<Figure*> _figures;
-
 public:
 	double  Area() override;
 	double Perimeter() override;
@@ -23,6 +22,10 @@ public:
 	void Highlight() override;
 	bool IsHighlighted() override;
 	bool ContainsPoint(Vector2f point) override;
+	void SetFillColor(Color color) override;
+
+	 void SetOutlineColor(Color color) override;
+	 void SetOutlineThickness(float thickness) override;
 
 	FloatRect GetGlobalBounds() override;
 	Vector2f GetPosition() override;

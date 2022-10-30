@@ -10,7 +10,7 @@ private:
 	CircleDecorator* _circle_decorator;
 
 public:
-	CircleFactory(Vector2f origin, int radius, Color fillColor);
+	CircleFactory(Vector2f origin, int radius, Color fillColor, Color outlineColor, float outlineThickness);
 	Figure* GetFigure() override;
 
 };

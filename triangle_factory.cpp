@@ -1,6 +1,7 @@
 #include "triangle_factory.h"
 
-TriangleFactory::TriangleFactory(Vector2f p1, Vector2f p2, Vector2f p3, Color color)
+TriangleFactory::TriangleFactory(Vector2f p1, Vector2f p2, Vector2f p3, Color color,
+	Color outlineColor, float outlineThickness)
 {
 
 	auto triangle = new TriangleDecorator(new ConvexShape());
@@ -9,6 +10,8 @@ TriangleFactory::TriangleFactory(Vector2f p1, Vector2f p2, Vector2f p3, Color co
 	triangle->SetPoint(1, Vector2f(p2.x, p2.y));
 	triangle->SetPoint(2, Vector2f(p3.x, p3.y));
 	triangle->SetFillColor(color);
+	triangle->SetOutlineColor(outlineColor);
+	triangle->SetOutlineThickness(outlineThickness);
 
 	auto shape = triangle->GetShape();
 

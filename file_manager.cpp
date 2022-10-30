@@ -25,7 +25,7 @@ vector<Figure*> FileManager::ReadInput()
 	}
 
 	auto result = vector<Figure*>();
-	int count;
+	int count = 0;
 	for (auto v : data)
 	{
 		if (v[0] == "TRIANGLE:") count = 3;
@@ -44,15 +44,18 @@ vector<Figure*> FileManager::ReadInput()
 		if (count == 1)
 		{
 			auto rad = MyExtensions::Split(v[2].substr(v[2].find('=') + 1), ';');
-			figure = CircleFactory(points[0], stoi(rad[0]), Color(255, 0, 0, 100)).GetFigure();
+			figure = CircleFactory(points[0], stoi(rad[0]),
+				Color(18, 130, 162, 190), Color(0, 0, 0),2).GetFigure();
 		}
 		else if (count == 2)
 		{
 			auto size = Vector2f(points[0].y, points[1].x);
-			figure = RectangleFactory(points[0], size, Color(120, 255, 0, 100)).GetFigure();
+			figure = RectangleFactory(points[0], size,
+				Color(238, 108, 77, 190), Color(0, 0, 0), 2).GetFigure();
 		}
 		else if (count == 3)
-			figure = TriangleFactory(points[0], points[1], points[2], Color(255, 0, 0, 100)).GetFigure();
+			figure = TriangleFactory(points[0], points[1], points[2],
+				Color(106, 76, 147, 190), Color(0, 0, 0), 2).GetFigure();
 
 		result.push_back(figure);
 	}

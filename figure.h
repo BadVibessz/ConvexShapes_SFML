@@ -11,6 +11,8 @@ protected:
 	bool _is_moving = false;
 	RectangleShape* _rectangle = nullptr;
 
+	Color _fillColor;
+
 public:
 	virtual double Area() = 0;
 	virtual double Perimeter() = 0;
@@ -21,8 +23,10 @@ public:
 	virtual std::string GetType() = 0;
 
 	void Draw(RenderWindow& window);
-	void SetFillColor(Color color);
-	virtual void SetPosition(Vector2f position) ;
+	virtual void SetFillColor(Color color);
+	virtual void SetOutlineColor(Color color);
+	virtual void SetOutlineThickness(float thickness);
+	virtual void SetPosition(Vector2f position);
 
 	virtual void Highlight();
 	virtual bool IsHighlighted();

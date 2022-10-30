@@ -95,7 +95,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\danil\Desktop\programming\C++\Libraries\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;gdi32.lib;winmm.lib;sfml-graphics-s-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;opengl32.lib;gdi32.lib;winmm.lib;sfml-graphics-s-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,36 +143,82 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="application_facade.cpp" />
+    <ClCompile Include="button.cpp" />
+    <ClCompile Include="change_outline_color_command.cpp" />
+    <ClCompile Include="change_outline_width_command.cpp" />
+    <ClCompile Include="changing_outline_color_state.cpp" />
     <ClCompile Include="circle_decorator.cpp" />
     <ClCompile Include="circle_factory.cpp" />
+    <ClCompile Include="create_circle_command.cpp" />
+    <ClCompile Include="create_rectangle_command.cpp" />
+    <ClCompile Include="creating_circle_state.cpp" />
+    <ClCompile Include="creating_rectangle_state.cpp" />
+    <ClCompile Include="create_triangle_command.cpp" />
+    <ClCompile Include="creating_triangle_state.cpp" />
+    <ClCompile Include="dragging_state.cpp" />
+    <ClCompile Include="dragg_and_drop_command.cpp" />
     <ClCompile Include="drawer.cpp" />
     <ClCompile Include="event_handler.cpp" />
     <ClCompile Include="figure.cpp" />
     <ClCompile Include="file_manager.cpp" />
+    <ClCompile Include="filling_state.cpp" />
+    <ClCompile Include="fill_shape_command.cpp" />
     <ClCompile Include="grouped_figure.cpp" />
     <ClCompile Include="my_extensions.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="rectangle_decorator.cpp" />
     <ClCompile Include="rectangle_factory.cpp" />
+    <ClCompile Include="setting_outline_width_state.cpp" />
+    <ClCompile Include="set_fill_color_command.cpp" />
+    <ClCompile Include="set_outline_color_command.cpp" />
+    <ClCompile Include="set_outline_width_command.cpp" />
     <ClCompile Include="SMFL.cpp" />
     <ClCompile Include="triangle_decorator.cpp" />
     <ClCompile Include="triangle_factory.cpp" />
+    <ClCompile Include="user_handler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="application_facade.h" />
+    <ClInclude Include="button.h" />
+    <ClInclude Include="change_outline_color_command.h" />
+    <ClInclude Include="change_outline_width_command.h" />
+    <ClInclude Include="changing_outline_color_state.h" />
     <ClInclude Include="circle_decorator.h" />
     <ClInclude Include="circle_factory.h" />
+    <ClInclude Include="command.h" />
+    <ClInclude Include="create_circle_command.h" />
+    <ClInclude Include="create_rectangle_command.h" />
+    <ClInclude Include="creating_circle_state.h" />
+    <ClInclude Include="creating_rectangle_state.h" />
+    <ClInclude Include="create_triangle_command.h" />
+    <ClInclude Include="creating_triangle_state.h" />
+    <ClInclude Include="dragging_state.h" />
+    <ClInclude Include="dragg_and_drop_command.h" />
     <ClInclude Include="drawer.h" />
     <ClInclude Include="event_handler.h" />
     <ClInclude Include="figure.h" />
     <ClInclude Include="figure_factory.h" />
     <ClInclude Include="file_manager.h" />
+    <ClInclude Include="filling_state.h" />
+    <ClInclude Include="fill_shape_command.h" />
     <ClInclude Include="grouped_figure.h" />
     <ClInclude Include="my_extensions.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="rectangle_decorator.h" />
     <ClInclude Include="rectangle_factory.h" />
+    <ClInclude Include="setting_outline_width_state.h" />
+    <ClInclude Include="set_fill_color_command.h" />
+    <ClInclude Include="set_outline_color_command.h" />
+    <ClInclude Include="set_outline_width_command.h" />
+    <ClInclude Include="tool_state.h" />
     <ClInclude Include="triangle_decorator.h" />
     <ClInclude Include="triangle_factory.h" />
+    <ClInclude Include="user_handler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt" />
+    <Text Include="output.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

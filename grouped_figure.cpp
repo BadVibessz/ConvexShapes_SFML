@@ -46,10 +46,10 @@ vector<Figure*> GroupedFigure::GetFigures()
 
 void GroupedFigure::SetPosition(Vector2f position)
 {
-	auto rect = GetPosition();
+	auto pos = GetPosition();
 
-	auto dx = position.x - rect.x;
-	auto dy = position.y - rect.y;
+	auto dx = position.x - pos.x;
+	auto dy = position.y - pos.y;
 
 	for (auto figure : _figures)
 	{
@@ -59,9 +59,6 @@ void GroupedFigure::SetPosition(Vector2f position)
 
 		figure->SetPosition(pos);
 	}
-
-
-
 }
 
 void GroupedFigure::Highlight()
@@ -82,6 +79,25 @@ bool GroupedFigure::ContainsPoint(Vector2f point)
 		if (figure->ContainsPoint(point))
 			return true;
 	return false;
+}
+
+void GroupedFigure::SetFillColor(Color color)
+{
+	for (auto figure : _figures)
+		figure->SetFillColor(color);
+}
+
+void GroupedFigure::SetOutlineColor(Color color)
+{
+	for (auto figure : _figures)
+		figure->SetOutlineColor(color);
+
+}
+
+void GroupedFigure::SetOutlineThickness(float thickness)
+{
+	for (auto figure : _figures)
+		figure->SetOutlineThickness(thickness);
 }
 
 FloatRect GroupedFigure::GetGlobalBounds()

@@ -8,7 +8,7 @@ private:
 	RectangleDecorator* _rectangle_decorator;
 
 public:
-	RectangleFactory(Vector2f position, Vector2f size, Color color);
+	RectangleFactory(Vector2f position, Vector2f size, Color color,Color outlineColor, float outlineThickness);
 	Figure* GetFigure() override;
 };
 
