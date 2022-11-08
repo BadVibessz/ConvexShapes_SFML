@@ -113,6 +113,13 @@ UserHandler::UserHandler(RenderWindow* window, ToolState* state)
 	_stateButtons.push_back(new Button(Vector2f(215, y), stateBtnSize, Color::White, Color::Black,
 		1, "Width Border", Color::Black, 12, new ChangeOutlineWidthCommand(this)));
 
+	// кнопки создания фигур
+	_stateButtons.push_back(new Button(Vector2f(5, y - 40), stateBtnSize, Color::White, Color::Black,
+		1, "Rectangle", Color::Black, 12, new CreateRectangleCommand(this)));
+	_stateButtons.push_back(new Button(Vector2f(75, y - 40), stateBtnSize, Color::White, Color::Black,
+		1, "Triangle", Color::Black, 12, new CreateTriangleCommand(this)));
+	_stateButtons.push_back(new Button(Vector2f(145, y - 40), stateBtnSize, Color::White, Color::Black,
+		1, "Circle", Color::Black, 12, new CreateCircleCommand(this)));
 
 	Vector2f fillColorBtnSize(30, 30);
 
@@ -145,13 +152,7 @@ UserHandler::UserHandler(RenderWindow* window, ToolState* state)
 		1, "8px", Color::Black, 14, new SetOutlineWidthCommand(this,8)));
 
 
-	// кнопки создания фигур
-	_stateButtons.push_back(new Button(Vector2f(5, y - 40), stateBtnSize, Color::White, Color::Black,
-		1, "Rectangle", Color::Black, 12, new CreateRectangleCommand(this)));
-	_stateButtons.push_back(new Button(Vector2f(75, y - 40), stateBtnSize, Color::White, Color::Black,
-		1, "Triangle", Color::Black, 12, new CreateTriangleCommand(this)));
-	_stateButtons.push_back(new Button(Vector2f(145, y - 40), stateBtnSize, Color::White, Color::Black,
-		1, "Circle", Color::Black, 12, new CreateCircleCommand(this)));
+	
 
 
 

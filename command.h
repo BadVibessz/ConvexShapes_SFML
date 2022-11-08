@@ -1,5 +1,6 @@
 #pragma once
 #include "user_handler.h"
+#include "application_facade.h"
 
 using namespace std;
 class Command

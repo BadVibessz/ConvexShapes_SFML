@@ -22,10 +22,10 @@ public:
 	void Highlight() override;
 	bool IsHighlighted() override;
 	bool ContainsPoint(Vector2f point) override;
-	void SetFillColor(Color color) override;
 
-	 void SetOutlineColor(Color color) override;
-	 void SetOutlineThickness(float thickness) override;
+	void SetFillColor(Color color) override;
+	void SetOutlineColor(Color color) override;
+	void SetOutlineThickness(float thickness) override;
 
 	FloatRect GetGlobalBounds() override;
 	Vector2f GetPosition() override;

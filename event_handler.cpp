@@ -1,8 +1,9 @@
 #include "event_handler.h"
 #include "rectangle_factory.h"
 #include "triangle_factory.h"
-#include "application_facade.h"
 #include "circle_factory.h"
+#include"undo_command.h"
+
 
 RenderWindow* EventHandler::_window;
 vector<Figure*> EventHandler::_figures;
@@ -15,6 +16,7 @@ vector<Button*> EventHandler::_stateButtons;
 vector<Button*> EventHandler::_fillColorButtons;
 vector<Button*> EventHandler::_outlineColorButtons;
 vector<Button*> EventHandler::_outlineWidthButtons;
+//ApplicationFacade* EventHandler::_app = ApplicationFacade::GetInstance(nullptr);
 
 
 void EventHandler::SetShapes(vector<Figure*> figures)
@@ -116,15 +118,12 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 	auto mouse_position = _window->mapPixelToCoords(Mouse::getPosition(*_window));
 
 
-
 	// drag state сразу выделена
 	if (_stateButtons[0]->IsPressed())
 		_stateButtons[0]->PressButton();
 
 	// выделяем кнопки при наведении
 	HandleCursorInButton(mouse_position);
-
-
 
 	switch (e.type)
 	{
@@ -135,44 +134,53 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 		if (Keyboard::isKeyPressed(Keyboard::LControl))
 		{
 
-			auto selected_figures = vector<Figure*>();
-			for (auto figure : _figures)
-				if (figure->IsHighlighted()) selected_figures.push_back(figure);
-
-			if (Keyboard::isKeyPressed(Keyboard::G) && selected_figures.size() > 1)
+			if (Keyboard::isKeyPressed(Keyboard::Z))
 			{
-				auto grouped = new GroupedFigure();
+				UndoCommand().Execute();
+			}
+			else
+			{
+				auto selected_figures = vector<Figure*>();
+				for (auto figure : _figures)
+					if (figure->IsHighlighted()) selected_figures.push_back(figure);
 
-				for (auto selected : selected_figures)
+				if (Keyboard::isKeyPressed(Keyboard::G) && selected_figures.size() > 1)
 				{
-					grouped->AddFigure(selected);
-					selected->Highlight();
+					auto grouped = new GroupedFigure();
 
-					auto it = find(_figures.begin(), _figures.end(), selected);
+					for (auto selected : selected_figures)
+					{
+						grouped->AddFigure(selected);
+						selected->Highlight();
 
-					if (it != _figures.end())
-						_figures.erase(it);
+						auto it = find(_figures.begin(), _figures.end(), selected);
+
+						if (it != _figures.end())
+							_figures.erase(it);
+					}
+
+					_figures.push_back(grouped);
 				}
 
-				_figures.push_back(grouped);
-			}
-
-			if (Keyboard::isKeyPressed(Keyboard::U) && selected_figures.size() != 0)
-			{
-				if (selected_figures.size() == 1 && selected_figures.back()->GetType() == "Grouped")
+				if (Keyboard::isKeyPressed(Keyboard::U) && selected_figures.size() != 0)
 				{
-					auto grouped_figures = ((GroupedFigure*)selected_figures.back())->GetFigures();
+					if (selected_figures.size() == 1 && selected_figures.back()->GetType() == "Grouped")
+					{
+						auto grouped_figures = ((GroupedFigure*)selected_figures.back())->GetFigures();
 
-					selected_figures.back()->Highlight();
+						selected_figures.back()->Highlight();
 
-					auto it = find(_figures.begin(), _figures.end(), selected_figures.back());
-					if (it != _figures.end())
-						_figures.erase(it);
+						auto it = find(_figures.begin(), _figures.end(), selected_figures.back());
+						if (it != _figures.end())
+							_figures.erase(it);
 
-					for (auto grouped_figure : grouped_figures)
-						_figures.push_back(grouped_figure);
+						for (auto grouped_figure : grouped_figures)
+							_figures.push_back(grouped_figure);
+					}
 				}
 			}
+
+			
 
 		}
 		break;
@@ -185,7 +193,6 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 		if (e.key.code == Mouse::Left)
 		{
 			auto state = user->GetState();
-
 
 			// выделяем и двигаем фигуры
 			if (state->GetName() == "DraggingState")
@@ -211,6 +218,11 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 
 						break;
 					}
+					else if(!_is_multi_select)
+					{
+						for (auto figure : _figures)
+							if (figure->IsHighlighted()) figure->Highlight();
+					}
 
 				}
 
@@ -220,11 +232,12 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						figure->SetFillColor(user->GetFillingColor());
+						//_app->Accept(new FillVisitor(user->GetFillingColor()), figure);
+
+						//figure->SetFillColor(user->GetFillingColor());
 
 						if (!figure->IsHighlighted())
 							HighlightOnlyThisFigure(figure);
-
 
 						break;
 					}
@@ -304,9 +317,6 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 
 			}
 
-
-
-
 			// нажимаем кнопки состояний
 			for (auto btn : _stateButtons)
 			{
@@ -341,7 +351,7 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			// нажимаем кнопки выбора цвета границы 
 			HandleButtonPressing(mouse_position, _outlineColorButtons);
 
-			// нажимаем кнопки выбора цвета границы 
+			// нажимаем кнопки выбора толщины границы 
 			HandleButtonPressing(mouse_position, _outlineWidthButtons);
 
 

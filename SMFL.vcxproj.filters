@@ -67,6 +67,18 @@
     <Filter Include="Source Files\Interface">
       <UniqueIdentifier>{a5abb038-b02e-4045-9595-078e960b015b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\HistoryManaging">
+      <UniqueIdentifier>{ecdcc5fb-6fcf-490d-afef-87fdffa18f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HistoryManaging">
+      <UniqueIdentifier>{468d4f95-92cb-48e6-8175-3e1383f6fd8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visitors">
+      <UniqueIdentifier>{0b8b2631-c199-4a59-a2f2-ba8d12d334f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visitors">
+      <UniqueIdentifier>{96a8cebf-8f9c-45a1-9a46-b28b4acff7d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SMFL.cpp">
@@ -170,6 +182,18 @@
     </ClCompile>
     <ClCompile Include="creating_circle_state.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="app_memento.cpp">
+      <Filter>Source Files\HistoryManaging</Filter>
+    </ClCompile>
+    <ClCompile Include="undo_command.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="fill_visitor.cpp">
+      <Filter>Source Files\Visitors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +304,18 @@
     </ClInclude>
     <ClInclude Include="creating_circle_state.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="app_memento.h">
+      <Filter>Header Files\HistoryManaging</Filter>
+    </ClInclude>
+    <ClInclude Include="undo_command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="visitor.h">
+      <Filter>Header Files\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="fill_visitor.h">
+      <Filter>Header Files\Visitors</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

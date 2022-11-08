@@ -14,6 +14,7 @@ ApplicationFacade::ApplicationFacade(RenderWindow* window)
 	EventHandler::SetFillColorButtons(_userHandler->GetFillColorButtons());
 	EventHandler::SetOutlineColorButtons(_userHandler->GetOutlineColorButtons());
 	EventHandler::SetOutlineWidthButtons(_userHandler->GetOutlineWidthButtons());
+
 }
 
 void ApplicationFacade::ReadInput()
@@ -47,6 +48,30 @@ void ApplicationFacade::DrawInput()
 void ApplicationFacade::AddFigure(Figure* figure)
 {
 	this->_figures.push_back(figure);
+}
+
+void ApplicationFacade::Accept(Visitor* visitor, Figure* figure)
+{
+	visitor->VisitFigure(figure);
+}
+
+AppMemento ApplicationFacade::SaveState()
+{
+	auto memento = AppMemento(this->_figures);
+	this->_history.push(memento);
+
+	return memento;
+}
+
+void ApplicationFacade::RestoreState(AppMemento memento)
+{
+	this->_figures = memento.GetFigures();
+}
+
+void ApplicationFacade::Undo()
+{
+	if (_history.size() == 0) return;
+	RestoreState(_history.top());
 }
 
 ApplicationFacade* ApplicationFacade::GetInstance(RenderWindow* window)

@@ -6,10 +6,14 @@
 #include "grouped_figure.h"
 #include "drawer.h"
 #include "user_handler.h"
+#include "fill_visitor.h"
 
 
 using namespace sf;
 using namespace std;
+
+class FillVisitor;
+class Button;
 
 class EventHandler
 {
@@ -35,6 +39,7 @@ public:
 	static void HandleEvent(Event e, UserHandler* user);
 
 	static void SetWindow(RenderWindow* window);
+
 	static void SetStateButtons(vector<Button*> buttons);
 	static void SetFillColorButtons(vector<Button*> buttons);
 	static void SetOutlineColorButtons(vector<Button*> buttons);

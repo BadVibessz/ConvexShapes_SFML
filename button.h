@@ -14,6 +14,7 @@ private:
 	RectangleShape _bounds;
 	Text _text;
 	Font _font;
+
 	Command* _command;
 
 	Color _fillColor;

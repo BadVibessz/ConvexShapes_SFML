@@ -14,6 +14,7 @@ class UserHandler // singleton
 {
 private:
 	static UserHandler* _instance;
+
 	RenderWindow* _window;
 	ToolState* _state;
 	UserHandler(RenderWindow* window, ToolState* state);

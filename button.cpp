@@ -3,7 +3,6 @@
 Button::Button(Vector2f position, Vector2f size, Color fillColor, Color outlineColor,
 	float outlineThickness, string text, Color textColor, int textSize, Command* command)
 {
-	// TODO: CHANGE!! (too similar)
 
 	_bounds.setPosition(position);
 	_bounds.setSize(size);
@@ -36,11 +35,11 @@ Button::Button(Vector2f position, Vector2f size, Color fillColor, Color outlineC
 
 }
 
-void Button::Render(RenderWindow& window) // todo: не работает текст??
+void Button::Render(RenderWindow& window)
 {
 	window.draw(_bounds);
 
-	_font.loadFromFile("Arial.ttf"); // todo: костыль, _font ломается после выхода из конструктора почему-то
+	_font.loadFromFile("Arial.ttf");
 	_text.setFont(_font);
 
 	window.draw(_text);
@@ -56,7 +55,7 @@ bool Button::Contains(Vector2f point)
 	return this->_bounds.getGlobalBounds().contains(point);
 }
 
-void Button::Highlight() // todo: сделать красивее
+void Button::Highlight()
 {
 	this->_isHighlighted = true;
 	this->_bounds.setOutlineColor(Color::Red);

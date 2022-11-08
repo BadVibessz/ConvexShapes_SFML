@@ -1,6 +1,8 @@
 #pragma once
 #include "command.h"
 
+class Command;
+
 class ChangeOutlineColorCommand : public Command
 {
 private:
