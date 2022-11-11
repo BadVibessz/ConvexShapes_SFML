@@ -56,14 +56,16 @@ bool Button::Contains(Vector2f point)
 	return this->_bounds.getGlobalBounds().contains(point);
 }
 
-void Button::Highlight() // todo: сделать красивее
+void Button::Highlight()
 {
+	if (_isPressed) return;
 	this->_isHighlighted = true;
 	this->_bounds.setOutlineColor(Color::Red);
 }
 
 void Button::UnHighlight()
 {
+	if (!_isHighlighted || _isPressed) return;
 	this->_isHighlighted = false;
 	this->_bounds.setOutlineColor(_outlineColor);
 }
@@ -81,14 +83,16 @@ bool Button::IsPressed()
 void Button::PressButton()
 {
 	this->_isPressed = true;
-	this->_bounds.setFillColor(Color(255, 89, 94));
+	this->_bounds.setOutlineThickness(2);
+	this->_bounds.setOutlineColor(Color::Red);
 	this->_command->Execute();
 }
 
 void Button::UnpressButton()
 {
 	this->_isPressed = false;
-	this->_bounds.setFillColor(_fillColor);
+	this->_bounds.setOutlineThickness(_outlineThickness);
+	this->_bounds.setOutlineColor(_outlineColor);
 }
 
 string Button::GetCommandName()

@@ -12,6 +12,30 @@ RectangleDecorator::RectangleDecorator(RectangleShape* rectangle_shape)
 
 }
 
+RectangleDecorator::RectangleDecorator(RectangleDecorator* rectangleDecorator)
+{
+	auto newShape = new RectangleShape();
+	auto oldShape = ((RectangleShape*)rectangleDecorator->GetShape());
+
+	// todo:
+
+	auto col = oldShape->getFillColor();
+
+	newShape->setPosition(oldShape->getPosition());
+	newShape->setSize(oldShape->getSize());
+	newShape->setFillColor(oldShape->getFillColor());
+	newShape->setOutlineColor(oldShape->getOutlineColor());
+	newShape->setOutlineThickness(oldShape->getOutlineThickness());
+
+	float w = newShape->getGlobalBounds().width;
+	float h = newShape->getGlobalBounds().height;
+	newShape->setOrigin(w / 2, h / 2);
+
+
+	this->_shape = newShape;
+
+}
+
 double RectangleDecorator::Area()
 {
 	auto size = ((RectangleShape*)_shape)->getSize();

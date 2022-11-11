@@ -67,6 +67,18 @@
     <Filter Include="Source Files\Interface">
       <UniqueIdentifier>{a5abb038-b02e-4045-9595-078e960b015b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\HistoryManager">
+      <UniqueIdentifier>{ef29e6a4-db99-4fbe-8fff-6e8c0c470690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\HistoryManager">
+      <UniqueIdentifier>{fe2ba64d-b018-4028-9144-10241acba5ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Visitors">
+      <UniqueIdentifier>{5b6d95fa-51fa-4f7d-bde7-8dbca4f143ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Visitors">
+      <UniqueIdentifier>{8c56fdce-9728-4a6a-a563-a27fdac6ef8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SMFL.cpp">
@@ -170,6 +182,24 @@
     </ClCompile>
     <ClCompile Include="creating_circle_state.cpp">
       <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="undo_command.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="app_memento.cpp">
+      <Filter>Source Files\HistoryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="fill_visitor.cpp">
+      <Filter>Source Files\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="change_outline_color_visitor.cpp">
+      <Filter>Source Files\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="change_outline_width_visitor.cpp">
+      <Filter>Source Files\Visitors</Filter>
+    </ClCompile>
+    <ClCompile Include="group_figures_command.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +310,27 @@
     </ClInclude>
     <ClInclude Include="creating_circle_state.h">
       <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="undo_command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="app_memento.h">
+      <Filter>Header Files\HistoryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="visitor.h">
+      <Filter>Header Files\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="fill_visitor.h">
+      <Filter>Header Files\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="change_outline_color_visitor.h">
+      <Filter>Header Files\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="change_outline_width_visitor.h">
+      <Filter>Header Files\Visitors</Filter>
+    </ClInclude>
+    <ClInclude Include="group_figures_command.h">
+      <Filter>Header Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

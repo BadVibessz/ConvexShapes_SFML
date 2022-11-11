@@ -144,9 +144,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application_facade.cpp" />
+    <ClCompile Include="app_memento.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="change_outline_color_command.cpp" />
+    <ClCompile Include="change_outline_color_visitor.cpp" />
     <ClCompile Include="change_outline_width_command.cpp" />
+    <ClCompile Include="change_outline_width_visitor.cpp" />
     <ClCompile Include="changing_outline_color_state.cpp" />
     <ClCompile Include="circle_decorator.cpp" />
     <ClCompile Include="circle_factory.cpp" />
@@ -164,7 +167,9 @@
     <ClCompile Include="file_manager.cpp" />
     <ClCompile Include="filling_state.cpp" />
     <ClCompile Include="fill_shape_command.cpp" />
+    <ClCompile Include="fill_visitor.cpp" />
     <ClCompile Include="grouped_figure.cpp" />
+    <ClCompile Include="group_figures_command.cpp" />
     <ClCompile Include="my_extensions.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="rectangle_decorator.cpp" />
@@ -176,13 +181,17 @@
     <ClCompile Include="SMFL.cpp" />
     <ClCompile Include="triangle_decorator.cpp" />
     <ClCompile Include="triangle_factory.cpp" />
+    <ClCompile Include="undo_command.cpp" />
     <ClCompile Include="user_handler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application_facade.h" />
+    <ClInclude Include="app_memento.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="change_outline_color_command.h" />
+    <ClInclude Include="change_outline_color_visitor.h" />
     <ClInclude Include="change_outline_width_command.h" />
+    <ClInclude Include="change_outline_width_visitor.h" />
     <ClInclude Include="changing_outline_color_state.h" />
     <ClInclude Include="circle_decorator.h" />
     <ClInclude Include="circle_factory.h" />
@@ -202,7 +211,9 @@
     <ClInclude Include="file_manager.h" />
     <ClInclude Include="filling_state.h" />
     <ClInclude Include="fill_shape_command.h" />
+    <ClInclude Include="fill_visitor.h" />
     <ClInclude Include="grouped_figure.h" />
+    <ClInclude Include="group_figures_command.h" />
     <ClInclude Include="my_extensions.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="rectangle_decorator.h" />
@@ -214,7 +225,9 @@
     <ClInclude Include="tool_state.h" />
     <ClInclude Include="triangle_decorator.h" />
     <ClInclude Include="triangle_factory.h" />
+    <ClInclude Include="undo_command.h" />
     <ClInclude Include="user_handler.h" />
+    <ClInclude Include="visitor.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />

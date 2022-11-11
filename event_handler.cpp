@@ -3,6 +3,11 @@
 #include "triangle_factory.h"
 #include "application_facade.h"
 #include "circle_factory.h"
+#include "fill_visitor.h"
+#include "change_outline_color_visitor.h"
+#include "change_outline_width_visitor.h"
+#include "undo_command.h"
+#include "application_facade.h"
 
 RenderWindow* EventHandler::_window;
 vector<Figure*> EventHandler::_figures;
@@ -110,6 +115,8 @@ bool EventHandler::IsPointInButtons(Vector2f mousePos)
 
 void EventHandler::HandleEvent(Event e, UserHandler* user)
 {
+	auto app = ApplicationFacade::GetInstance(nullptr);
+
 	if (e.type == Event::Closed)
 		_window->close();
 
@@ -132,7 +139,11 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 		if (e.key.code == Keyboard::LShift)
 			_is_multi_select = true;
 
-		if (Keyboard::isKeyPressed(Keyboard::LControl))
+		if (Keyboard::isKeyPressed(Keyboard::Z))
+		{
+			UndoCommand().Execute();
+		}
+		else if (Keyboard::isKeyPressed(Keyboard::LControl))
 		{
 
 			auto selected_figures = vector<Figure*>();
@@ -141,6 +152,8 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 
 			if (Keyboard::isKeyPressed(Keyboard::G) && selected_figures.size() > 1)
 			{
+				app->SaveState();
+
 				auto grouped = new GroupedFigure();
 
 				for (auto selected : selected_figures)
@@ -161,6 +174,8 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			{
 				if (selected_figures.size() == 1 && selected_figures.back()->GetType() == "Grouped")
 				{
+					app->SaveState();
+
 					auto grouped_figures = ((GroupedFigure*)selected_figures.back())->GetFigures();
 
 					selected_figures.back()->Highlight();
@@ -193,6 +208,8 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
+						app->SaveState();
+
 						if (!figure->IsHighlighted())
 						{
 							if (_is_multi_select)
@@ -201,6 +218,8 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 							else
 								HighlightOnlyThisFigure(figure);
 						}
+
+
 
 
 						_is_moving = true;
@@ -220,7 +239,9 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						figure->SetFillColor(user->GetFillingColor());
+						//figure->SetFillColor(user->GetFillingColor());
+
+						app->Accept(new FillVisitor(user->GetFillingColor()), figure);
 
 						if (!figure->IsHighlighted())
 							HighlightOnlyThisFigure(figure);
@@ -236,7 +257,9 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						figure->SetOutlineColor(user->GetOutlineColor());
+						//figure->SetOutlineColor(user->GetOutlineColor());
+
+						app->Accept(new ChangeOutlineColorVisitor(user->GetOutlineColor()), figure);
 
 						if (!figure->IsHighlighted())
 							HighlightOnlyThisFigure(figure);
@@ -252,7 +275,7 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						figure->SetOutlineThickness(user->GetOutlineWidth());
+						app->Accept(new ChangeOutlineWidthVisitor(user->GetOutlineWidth()), figure);
 
 						if (!figure->IsHighlighted())
 							HighlightOnlyThisFigure(figure);
@@ -265,6 +288,8 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			{
 				if (!IsPointInButtons(mouse_position))
 				{
+					app->SaveState();
+
 					auto rect = RectangleFactory(mouse_position, Vector2f(100, 200),
 						Color(238, 108, 77, 190), Color(0, 0, 0), 2).GetFigure();
 					ApplicationFacade::GetInstance(_window)->AddFigure(rect);
@@ -277,6 +302,8 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			{
 				if (!IsPointInButtons(mouse_position))
 				{
+					app->SaveState();
+
 					auto p1 = mouse_position;
 					auto p2 = Vector2f(p1.x + 100, p1.y);
 					auto p3 = Vector2f(p1.x, p1.y + 100);
@@ -294,7 +321,7 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			{
 				if (!IsPointInButtons(mouse_position))
 				{
-
+					app->SaveState();
 
 					auto circle = CircleFactory(mouse_position, 50, Color(238, 108, 77, 190),
 						Color(0, 0, 0), 2).GetFigure();

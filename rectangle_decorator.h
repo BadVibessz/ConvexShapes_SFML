@@ -6,6 +6,7 @@ class RectangleDecorator :  public Figure
 {
 public:
 	RectangleDecorator(RectangleShape* rectangle_shape);
+	RectangleDecorator(RectangleDecorator* rectangleDecorator);
 
 	double  Area() override;
 	double Perimeter() override;

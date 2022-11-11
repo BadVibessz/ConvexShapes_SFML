@@ -12,6 +12,20 @@ CircleDecorator::CircleDecorator(CircleShape* circle_shape)
 
 }
 
+CircleDecorator::CircleDecorator(CircleDecorator* circleDecorator)
+{
+	auto newShape = new CircleShape();
+	auto oldShape = ((CircleShape*)circleDecorator->GetShape());
+
+	newShape->setPosition(oldShape->getPosition());
+	newShape->setRadius(oldShape->getRadius());
+	newShape->setFillColor(oldShape->getFillColor());
+	newShape->setOutlineColor(oldShape->getOutlineColor());
+	newShape->setOutlineThickness(oldShape->getOutlineThickness());
+
+	this->_shape = newShape;
+}
+
 double CircleDecorator::Area()
 {
 	return pow(((CircleShape*)_shape)->getRadius(), 2) * PI;

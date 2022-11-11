@@ -8,6 +8,7 @@ class CircleDecorator : public Figure
 {
 public:
 	CircleDecorator(CircleShape* circle_shape);
+	CircleDecorator(CircleDecorator* circleDecorator);
 
 	double Area() override;
 	double Perimeter() override;

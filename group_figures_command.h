@@ -1,14 +1,14 @@
 #pragma once
 #include "command.h"
 
-class CreateRectangleCommand : public Command
+class GroupFiguresCommand : public Command
 {
 private:
-	 UserHandler* _user;
-
+	UserHandler* _user;
 public:
 	string GetName() override;
-	CreateRectangleCommand(UserHandler* user);
+
+	GroupFiguresCommand(UserHandler* user);
 	void Execute() override;
 
 };
