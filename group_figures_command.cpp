@@ -8,3 +8,7 @@ string GroupFiguresCommand::GetName()
 GroupFiguresCommand::GroupFiguresCommand(UserHandler* user)
 {
 }
+
+void GroupFiguresCommand::Execute()
+{
+}
