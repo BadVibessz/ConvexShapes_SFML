@@ -11,6 +11,33 @@ TriangleDecorator::TriangleDecorator(ConvexShape* triangle_shape)
 
 }
 
+TriangleDecorator::TriangleDecorator(TriangleDecorator* decorator)
+{
+
+	auto newShape = new ConvexShape();
+	auto oldShape = ((ConvexShape*)decorator->GetShape());
+
+
+	auto col = oldShape->getFillColor();
+
+	newShape->setPosition(oldShape->getPosition());
+	newShape->setPointCount(oldShape->getPointCount());
+	newShape->setPoint(0, oldShape->getPoint(0));
+	newShape->setPoint(1, oldShape->getPoint(1));
+	newShape->setPoint(2, oldShape->getPoint(2));
+	newShape->setFillColor(oldShape->getFillColor());
+	newShape->setOutlineColor(oldShape->getOutlineColor());
+	newShape->setOutlineThickness(oldShape->getOutlineThickness());
+
+	float w = newShape->getGlobalBounds().width;
+	float h = newShape->getGlobalBounds().height;
+	newShape->setOrigin(w / 2, h / 2);
+
+
+	this->_shape = newShape;
+
+}
+
 double TriangleDecorator::Area()
 {
 	auto p1 = ((ConvexShape*)_shape)->getPoint(0);

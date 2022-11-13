@@ -6,6 +6,7 @@ class TriangleDecorator : public Figure
 {
 public:
 	TriangleDecorator(ConvexShape* triangle_shape);
+	TriangleDecorator(TriangleDecorator* decorator);
 
 	double Area() override;
 	double Perimeter() override;

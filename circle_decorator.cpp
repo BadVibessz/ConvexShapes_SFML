@@ -4,12 +4,6 @@
 CircleDecorator::CircleDecorator(CircleShape* circle_shape)
 {
 	this->_shape = circle_shape;
-
-	/*float w = this->_shape->getGlobalBounds().width;
-	float h = this->_shape->getGlobalBounds().height;
-	this->_shape->setOrigin(w / 2, h / 2);*/
-
-
 }
 
 CircleDecorator::CircleDecorator(CircleDecorator* circleDecorator)
@@ -22,6 +16,12 @@ CircleDecorator::CircleDecorator(CircleDecorator* circleDecorator)
 	newShape->setFillColor(oldShape->getFillColor());
 	newShape->setOutlineColor(oldShape->getOutlineColor());
 	newShape->setOutlineThickness(oldShape->getOutlineThickness());
+
+	float w = newShape->getGlobalBounds().width;
+	float h = newShape->getGlobalBounds().height;
+
+	newShape->setOrigin(w / 2, h / 2);
+
 
 	this->_shape = newShape;
 }

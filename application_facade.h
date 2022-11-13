@@ -35,16 +35,21 @@ private:
 	stack<AppMemento> _history = stack<AppMemento>();
 
 
+	ApplicationFacade(int width, int height);
 	ApplicationFacade(RenderWindow* window);
 
 	vector<Figure*> CopyFigures(vector<Figure*> figures);
 
 public:
+	void Run();
+
+
 	void ReadInput();
 	void SaveData();
 	void HandleEvent(Event e);
 	void DrawInput();
 	void AddFigure(Figure* figure);
+	static ApplicationFacade* GetInstance(int width, int height);
 	static ApplicationFacade* GetInstance(RenderWindow* window);
 
 	void Accept(Visitor* visitor, Figure* figure);
