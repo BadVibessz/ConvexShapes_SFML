@@ -1,14 +1,13 @@
 #include "triangle_decorator.h"
 
+TriangleDecorator::TriangleDecorator()
+{
+	this->_shape = new ConvexShape();
+}
+
 TriangleDecorator::TriangleDecorator(ConvexShape* triangle_shape)
 {
 	_shape = triangle_shape;
-
-
-	/*float w = this->_shape->getGlobalBounds().width;
-	float h = this->_shape->getGlobalBounds().height;
-	this->_shape->setOrigin(w / 2, h / 2);*/
-
 }
 
 TriangleDecorator::TriangleDecorator(TriangleDecorator* decorator)
@@ -29,9 +28,15 @@ TriangleDecorator::TriangleDecorator(TriangleDecorator* decorator)
 	newShape->setOutlineColor(oldShape->getOutlineColor());
 	newShape->setOutlineThickness(oldShape->getOutlineThickness());
 
-	float w = newShape->getGlobalBounds().width;
+	_fillColor = oldShape->getFillColor();
+	_outlineColor = oldShape->getOutlineColor();
+	_outlineThikness = oldShape->getOutlineThickness();
+
+
+
+	/*float w = newShape->getGlobalBounds().width;
 	float h = newShape->getGlobalBounds().height;
-	newShape->setOrigin(w / 2, h / 2);
+	newShape->setOrigin(w / 2, h / 2);*/
 
 
 	this->_shape = newShape;
@@ -74,4 +79,9 @@ void TriangleDecorator::SetPointCount(int count)
 void TriangleDecorator::SetPoint(int i, Vector2f vec)
 {
 	((ConvexShape*)_shape)->setPoint(i, vec);
+}
+
+Vector2f TriangleDecorator::GetPoint(int i)
+{
+	return _shape->getPoint(i);
 }

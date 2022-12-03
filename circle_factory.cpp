@@ -16,9 +16,9 @@ CircleFactory::CircleFactory(Vector2f origin, int radius, Color color, Color out
 
 	auto shape = circle->GetShape();
 
-	float w = shape->getGlobalBounds().width;
+	/*float w = shape->getGlobalBounds().width;
 	float h = shape->getGlobalBounds().height;
-	shape->setOrigin(w / 2, h / 2);
+	shape->setOrigin(w / 2, h / 2);*/
 
 	this->_circle_decorator = circle;
 

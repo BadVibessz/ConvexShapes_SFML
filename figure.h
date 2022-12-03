@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <string>
 
+using namespace std;
 using namespace sf;
 
 class Figure
@@ -12,6 +14,8 @@ protected:
 	RectangleShape* _rectangle = nullptr;
 
 	Color _fillColor;
+	Color _outlineColor;
+	float _outlineThikness;
 
 public:
 	virtual double Area() = 0;
@@ -22,11 +26,15 @@ public:
 
 	virtual std::string GetType() = 0;
 
-	void Draw(RenderWindow& window);
+	void virtual Draw(RenderWindow& window);
 	virtual void SetFillColor(Color color);
 	virtual void SetOutlineColor(Color color);
 	virtual void SetOutlineThickness(float thickness);
 	virtual void SetPosition(Vector2f position);
+
+	virtual Color GetFillColor();
+	virtual Color GetOutlineColor();
+	virtual float GetOutlineThickness();
 
 	virtual void Highlight();
 	virtual bool IsHighlighted();

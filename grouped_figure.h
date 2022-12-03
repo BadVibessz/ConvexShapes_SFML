@@ -10,13 +10,18 @@ class GroupedFigure : public Figure
 private:
 	vector<Figure*> _figures;
 public:
+	GroupedFigure() = default;
+	GroupedFigure(GroupedFigure* other);
+
 	double  Area() override;
 	double Perimeter() override;
-	std::string GetType() override;
+	string GetType() override;
 
 	void AddFigure(Figure* figure);
 	void DeleteFigure(Figure* figure);
 	vector<Figure*> GetFigures();
+
+	void Draw(RenderWindow& window) override;
 
 	void SetPosition(Vector2f position) override;
 	void Highlight() override;

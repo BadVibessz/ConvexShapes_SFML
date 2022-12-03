@@ -1,4 +1,23 @@
 #include "grouped_figure.h"
+#include "my_extensions.h"
+
+GroupedFigure::GroupedFigure(GroupedFigure* other)
+{
+
+	this->_figures = MyExtensions::CopyFigures(other->GetFigures());
+
+	/*auto otherFigures = other->GetFigures();
+	this->_figures = vector<Figure*>(otherFigures);*/
+
+
+	/*for (int i = 0; i < _figures.size(); i++)
+	{
+		_figures[i]->SetPosition(otherFigures[i]->GetPosition());
+		_figures[i]->SetFillColor(otherFigures[i]->GetFillColor());
+		_figures[i]->SetOutlineColor(otherFigures[i]->GetOutlineColor());
+		_figures[i]->SetOutlineThickness(otherFigures[i]->GetOutlineThickness());
+	}*/
+}
 
 double GroupedFigure::Area()
 {
@@ -41,7 +60,14 @@ void GroupedFigure::DeleteFigure(Figure* figure)
 
 vector<Figure*> GroupedFigure::GetFigures()
 {
-	return _figures;
+	return vector<Figure*>(_figures);
+}
+
+void GroupedFigure::Draw(RenderWindow& window)
+{
+	for (auto figure : _figures)
+		figure->Draw(window);
+
 }
 
 void GroupedFigure::SetPosition(Vector2f position)

@@ -1,6 +1,13 @@
 #include "circle_decorator.h"
 #define PI 3.1415926535;
 
+
+
+CircleDecorator::CircleDecorator()
+{
+	this->_shape = new CircleShape();
+}
+
 CircleDecorator::CircleDecorator(CircleShape* circle_shape)
 {
 	this->_shape = circle_shape;
@@ -17,10 +24,14 @@ CircleDecorator::CircleDecorator(CircleDecorator* circleDecorator)
 	newShape->setOutlineColor(oldShape->getOutlineColor());
 	newShape->setOutlineThickness(oldShape->getOutlineThickness());
 
-	float w = newShape->getGlobalBounds().width;
-	float h = newShape->getGlobalBounds().height;
 
-	newShape->setOrigin(w / 2, h / 2);
+	_fillColor = oldShape->getFillColor();
+	_outlineColor = oldShape->getOutlineColor();
+	_outlineThikness = oldShape->getOutlineThickness();
+	//float w = newShape->getGlobalBounds().width;
+	//float h = newShape->getGlobalBounds().height;
+
+	//newShape->setOrigin(w / 2, h / 2);
 
 
 	this->_shape = newShape;
@@ -41,4 +52,9 @@ std::string CircleDecorator::GetType()
 void CircleDecorator::SetRadius(float rad)
 {
 	((CircleShape*)_shape)->setRadius(rad);
+}
+
+float CircleDecorator::GetRadius()
+{
+	return ((CircleShape*)_shape)->getRadius();
 }

@@ -1,6 +1,11 @@
 #include "rectangle_decorator.h"
 
 
+RectangleDecorator::RectangleDecorator()
+{
+	this->_shape = new RectangleShape();
+}
+
 RectangleDecorator::RectangleDecorator(RectangleShape* rectangle_shape)
 {
 	this->_shape = rectangle_shape;
@@ -27,9 +32,13 @@ RectangleDecorator::RectangleDecorator(RectangleDecorator* rectangleDecorator)
 	newShape->setOutlineColor(oldShape->getOutlineColor());
 	newShape->setOutlineThickness(oldShape->getOutlineThickness());
 
-	float w = newShape->getGlobalBounds().width;
-	float h = newShape->getGlobalBounds().height;
-	newShape->setOrigin(w / 2, h / 2);
+	_fillColor = oldShape->getFillColor();
+	_outlineColor = oldShape->getOutlineColor();
+	_outlineThikness = oldShape->getOutlineThickness();
+
+	//float w = newShape->getGlobalBounds().width;
+	//float h = newShape->getGlobalBounds().height;
+	//newShape->setOrigin(w / 2, h / 2);
 
 
 	this->_shape = newShape;
@@ -56,5 +65,10 @@ std::string RectangleDecorator::GetType()
 void RectangleDecorator::SetSize(Vector2f vec)
 {
 	((RectangleShape*)_shape)->setSize(vec);
+}
+
+Vector2f RectangleDecorator::GetSize()
+{
+	return ((RectangleShape*)_shape)->getSize();
 }
 

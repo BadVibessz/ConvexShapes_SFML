@@ -40,6 +40,36 @@ int MyExtensions::Random(int a, int b)
 	return a + rand() % (abs(a) + b);
 }
 
+vector<Figure*> MyExtensions::CopyFigures(vector<Figure*> figures)
+{
+	auto vec = vector<Figure*>();
+	for (auto figure : figures)
+	{
+		if (figure->GetType() == "Circle")
+		{
+			auto circle = ((CircleDecorator*)figure);
+			vec.push_back(new CircleDecorator(circle));
+		}
+		else if (figure->GetType() == "Rectangle")
+		{
+			auto rect = ((RectangleDecorator*)figure);
+			vec.push_back(new RectangleDecorator(rect));
+		}
+		else if (figure->GetType() == "Triangle")
+		{
+			auto triag = ((TriangleDecorator*)figure);
+			vec.push_back(new TriangleDecorator(triag));
+		}
+		else if (figure->GetType() == "Grouped")
+		{
+			auto grouped = ((GroupedFigure*)figure);
+			vec.push_back(new GroupedFigure(grouped));
+		}
+	}
+
+	return vec;
+}
+
 
 //
 //template <typename Out>

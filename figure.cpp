@@ -2,16 +2,19 @@
 
 void Figure::SetFillColor(Color color)
 {
+	this->_fillColor = color;
 	this->_shape->setFillColor(color);
 }
 
 void Figure::SetOutlineColor(Color color)
 {
+	this->_outlineColor = color;
 	this->_shape->setOutlineColor(color);
 }
 
 void Figure::SetOutlineThickness(float thickness)
 {
+	this->_outlineThikness = thickness;
 	this->_shape->setOutlineThickness(thickness);
 }
 
@@ -20,6 +23,21 @@ void Figure::SetPosition(Vector2f pos)
 	this->_shape->setPosition(pos);
 	if (_rectangle != nullptr)
 		this->_rectangle->setPosition(Vector2f(_shape->getGlobalBounds().left, _shape->getGlobalBounds().top));
+}
+
+Color Figure::GetFillColor()
+{
+	return _fillColor;
+}
+
+Color Figure::GetOutlineColor()
+{
+	return _outlineColor;
+}
+
+float Figure::GetOutlineThickness()
+{
+	return _outlineThikness;
 }
 
 void Figure::Highlight()
@@ -34,7 +52,7 @@ void Figure::Highlight()
 		_rectangle->setOutlineColor(Color::Transparent);
 	}
 
-	if (_is_highlighted) 
+	if (_is_highlighted)
 	{
 		_is_highlighted = false;
 
@@ -60,6 +78,8 @@ Shape* Figure::GetShape()
 {
 	return this->_shape;
 }
+
+
 
 
 bool Figure::ContainsPoint(Vector2f point)

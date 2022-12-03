@@ -7,6 +7,7 @@
 class CircleDecorator : public Figure
 {
 public:
+	CircleDecorator();
 	CircleDecorator(CircleShape* circle_shape);
 	CircleDecorator(CircleDecorator* circleDecorator);
 
@@ -15,5 +16,6 @@ public:
 	std::string GetType() override;
 
 	void SetRadius(float rad);
+	float GetRadius();
 };
 

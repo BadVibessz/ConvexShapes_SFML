@@ -14,5 +14,7 @@ class FileManager
 public:
 	static vector<Figure*> ReadInput();
 	static void SaveData(vector<Figure*> figures);
+	static void SaveData(vector<string> serializedFigures, string pathToSave);
+
 };
 

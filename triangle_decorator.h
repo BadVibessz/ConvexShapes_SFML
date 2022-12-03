@@ -5,6 +5,7 @@
 class TriangleDecorator : public Figure
 {
 public:
+	TriangleDecorator();
 	TriangleDecorator(ConvexShape* triangle_shape);
 	TriangleDecorator(TriangleDecorator* decorator);
 
@@ -14,6 +15,7 @@ public:
 
 	void SetPointCount(int count);
 	void SetPoint(int i, Vector2f point);
+	Vector2f GetPoint(int i);
 };
 
 

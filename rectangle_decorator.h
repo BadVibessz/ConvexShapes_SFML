@@ -5,6 +5,7 @@
 class RectangleDecorator :  public Figure
 {
 public:
+	RectangleDecorator();
 	RectangleDecorator(RectangleShape* rectangle_shape);
 	RectangleDecorator(RectangleDecorator* rectangleDecorator);
 
@@ -13,6 +14,7 @@ public:
 	std::string GetType() override;
 	
 	void SetSize(Vector2f vec);
+	Vector2f GetSize();
 
 };
 

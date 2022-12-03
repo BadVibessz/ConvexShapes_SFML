@@ -7,6 +7,7 @@ string GroupFiguresCommand::GetName()
 
 GroupFiguresCommand::GroupFiguresCommand(UserHandler* user)
 {
+    this->_user = user;
 }
 
 void GroupFiguresCommand::Execute()

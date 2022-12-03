@@ -79,6 +79,24 @@
     <Filter Include="Source Files\Visitors">
       <UniqueIdentifier>{8c56fdce-9728-4a6a-a563-a27fdac6ef8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Saver">
+      <UniqueIdentifier>{77e993d5-6bcb-49aa-a2f8-dc8fde0b8f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Saver">
+      <UniqueIdentifier>{bfbae976-5107-4e4e-815f-a4f2a619c5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loader">
+      <UniqueIdentifier>{43d3553b-2fdb-4b8b-95e4-e852847a515b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loader">
+      <UniqueIdentifier>{9a3ecf41-3f73-41f4-a0fe-5b6400643aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Builders">
+      <UniqueIdentifier>{8ff76fd1-2546-4544-9577-b96ae1caff5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Builders">
+      <UniqueIdentifier>{65182d1d-c96a-40bd-a557-918d1587e942}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SMFL.cpp">
@@ -200,6 +218,51 @@
     </ClCompile>
     <ClCompile Include="group_figures_command.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="save_as_command.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="txt_saver.cpp">
+      <Filter>Source Files\Saver</Filter>
+    </ClCompile>
+    <ClCompile Include="delete_command.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="binary_saver.cpp">
+      <Filter>Source Files\Saver</Filter>
+    </ClCompile>
+    <ClCompile Include="figure_handler.cpp">
+      <Filter>Source Files\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="loader.cpp">
+      <Filter>Source Files\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="load_command.cpp">
+      <Filter>Source Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="txt_loader.cpp">
+      <Filter>Source Files\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="binary_loader.cpp">
+      <Filter>Source Files\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="saver.cpp">
+      <Filter>Source Files\Saver</Filter>
+    </ClCompile>
+    <ClCompile Include="figure_builder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="rectangle_builder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="triangle_builder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="circle_builder.cpp">
+      <Filter>Source Files\Builders</Filter>
+    </ClCompile>
+    <ClCompile Include="grouped_figure_builder.cpp">
+      <Filter>Source Files\Builders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +394,51 @@
     </ClInclude>
     <ClInclude Include="group_figures_command.h">
       <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="save_as_command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="saver.h">
+      <Filter>Header Files\Saver</Filter>
+    </ClInclude>
+    <ClInclude Include="txt_saver.h">
+      <Filter>Header Files\Saver</Filter>
+    </ClInclude>
+    <ClInclude Include="delete_command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="binary_saver.h">
+      <Filter>Header Files\Saver</Filter>
+    </ClInclude>
+    <ClInclude Include="figure_handler.h">
+      <Filter>Header Files\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="loader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="txt_loader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="load_command.h">
+      <Filter>Header Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="binary_loader.h">
+      <Filter>Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="figure_builder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle_builder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_builder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="circle_builder.h">
+      <Filter>Header Files\Builders</Filter>
+    </ClInclude>
+    <ClInclude Include="grouped_figure_builder.h">
+      <Filter>Header Files\Builders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

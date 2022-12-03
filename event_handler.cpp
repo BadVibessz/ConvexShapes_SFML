@@ -3,14 +3,20 @@
 #include "triangle_factory.h"
 #include "application_facade.h"
 #include "circle_factory.h"
-#include "fill_visitor.h"
-#include "change_outline_color_visitor.h"
-#include "change_outline_width_visitor.h"
 #include "undo_command.h"
 #include "application_facade.h"
+#include "save_as_command.h"
+#include "txt_saver.h"
+#include "binary_saver.h"
+#include "delete_command.h"
+#include "load_command.h"
+#include "txt_loader.h"
+#include "binary_loader.h"
+
+#include <iostream>
 
 RenderWindow* EventHandler::_window;
-vector<Figure*> EventHandler::_figures;
+vector<Figure*>* EventHandler::_figures;
 bool EventHandler::_is_multi_select = false;
 bool EventHandler::_is_moving = false;
 Figure* EventHandler::_selected_figure = nullptr;
@@ -22,7 +28,7 @@ vector<Button*> EventHandler::_outlineColorButtons;
 vector<Button*> EventHandler::_outlineWidthButtons;
 
 
-void EventHandler::SetShapes(vector<Figure*> figures)
+void EventHandler::SetFigures(vector<Figure*>* figures)
 {
 	_figures = figures;
 }
@@ -52,7 +58,7 @@ void EventHandler::SetOutlineWidthButtons(vector<Button*> buttons)
 void EventHandler::HighlightOnlyThisFigure(Figure* figure)
 {
 	figure->Highlight();
-	for (auto fig : _figures)
+	for (auto fig : *_figures)
 		if (fig->IsHighlighted() && fig != figure) fig->Highlight();
 }
 
@@ -121,8 +127,7 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 		_window->close();
 
 	auto mouse_position = _window->mapPixelToCoords(Mouse::getPosition(*_window));
-
-
+	//cout << "(" + to_string(mouse_position.x) + ", " + to_string(mouse_position.y) << endl;;
 
 	// drag state сразу выделена
 	if (_stateButtons[0]->IsPressed())
@@ -131,63 +136,61 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 	// выделяем кнопки при наведении
 	HandleCursorInButton(mouse_position);
 
-
-
 	switch (e.type)
 	{
 	case Event::KeyPressed:
 		if (e.key.code == Keyboard::LShift)
 			_is_multi_select = true;
 
-		if (Keyboard::isKeyPressed(Keyboard::Z))
+		else if (e.key.code == Keyboard::Delete)
 		{
-			UndoCommand().Execute();
-		}
-		else if (Keyboard::isKeyPressed(Keyboard::LControl))
-		{
-
 			auto selected_figures = vector<Figure*>();
-			for (auto figure : _figures)
+			for (auto figure : *_figures)
 				if (figure->IsHighlighted()) selected_figures.push_back(figure);
 
+			app->SaveState();
+			DeleteCommand(selected_figures).Execute();
+		}
+
+		else if (Keyboard::isKeyPressed(Keyboard::LControl))
+		{
+			// saving
+			if (Keyboard::isKeyPressed(Keyboard::S))
+			{
+				if (Keyboard::isKeyPressed(Keyboard::T))
+					SaveAsCommand(TxtSaver::GetInstance(), "saved").Execute();
+
+				if (Keyboard::isKeyPressed(Keyboard::B))
+					SaveAsCommand(BinarySaver::GetInstance(), "saved").Execute();
+			}
+
+			// loading
+			else if (Keyboard::isKeyPressed(Keyboard::L))
+			{
+				if (Keyboard::isKeyPressed(Keyboard::T))
+					LoadCommand(TxtLoader::GetInstance(), "saved.txt").Execute();
+
+				if (Keyboard::isKeyPressed(Keyboard::B))
+					LoadCommand(BinaryLoader::GetInstance(), "saved.bin").Execute();
+
+			}
+
+			// undo
+			else if (Keyboard::isKeyPressed(Keyboard::Z))
+				UndoCommand().Execute();
+
+			auto selected_figures = vector<Figure*>();
+			for (auto figure : *_figures)
+				if (figure->IsHighlighted()) selected_figures.push_back(figure);
+
+			// grouping
 			if (Keyboard::isKeyPressed(Keyboard::G) && selected_figures.size() > 1)
-			{
-				app->SaveState();
+				FigureHandler::GroupFigures(selected_figures);
 
-				auto grouped = new GroupedFigure();
-
-				for (auto selected : selected_figures)
-				{
-					grouped->AddFigure(selected);
-					selected->Highlight();
-
-					auto it = find(_figures.begin(), _figures.end(), selected);
-
-					if (it != _figures.end())
-						_figures.erase(it);
-				}
-
-				_figures.push_back(grouped);
-			}
-
-			if (Keyboard::isKeyPressed(Keyboard::U) && selected_figures.size() != 0)
-			{
-				if (selected_figures.size() == 1 && selected_figures.back()->GetType() == "Grouped")
-				{
-					app->SaveState();
-
-					auto grouped_figures = ((GroupedFigure*)selected_figures.back())->GetFigures();
-
-					selected_figures.back()->Highlight();
-
-					auto it = find(_figures.begin(), _figures.end(), selected_figures.back());
-					if (it != _figures.end())
-						_figures.erase(it);
-
-					for (auto grouped_figure : grouped_figures)
-						_figures.push_back(grouped_figure);
-				}
-			}
+			// ungrouping
+			else if (Keyboard::isKeyPressed(Keyboard::U) && selected_figures.size() == 1
+				&& selected_figures.back()->GetType() == "Grouped")
+				FigureHandler::UngroupFigure(((GroupedFigure*)selected_figures.back()));
 
 		}
 		break;
@@ -201,14 +204,13 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 		{
 			auto state = user->GetState();
 
-
 			// выделяем и двигаем фигуры
 			if (state->GetName() == "DraggingState")
-				for (auto figure : _figures)
+				for (auto figure : *_figures)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						app->SaveState();
+						app->SaveState(true);
 
 						if (!figure->IsHighlighted())
 						{
@@ -219,14 +221,12 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 								HighlightOnlyThisFigure(figure);
 						}
 
-
-
-
 						_is_moving = true;
 						_selected_figure = figure;
 
 						_dx = mouse_position.x - _selected_figure->GetPosition().x;
 						_dy = mouse_position.y - _selected_figure->GetPosition().y;
+
 
 						break;
 					}
@@ -235,50 +235,33 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 
 			// заливаем фигуру заданным цветов
 			else if (state->GetName() == "FillingState")
-				for (auto figure : _figures)
+				for (auto figure : *_figures)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						//figure->SetFillColor(user->GetFillingColor());
-
-						app->Accept(new FillVisitor(user->GetFillingColor()), figure);
-
-						if (!figure->IsHighlighted())
-							HighlightOnlyThisFigure(figure);
-
-
+						FigureHandler::ChangeFigureFillColor(figure, user);
 						break;
 					}
 				}
 
 			// меняем цвет границы
 			else if (state->GetName() == "ChangingOutlineColorState")
-				for (auto figure : _figures)
+				for (auto figure : *_figures)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						//figure->SetOutlineColor(user->GetOutlineColor());
-
-						app->Accept(new ChangeOutlineColorVisitor(user->GetOutlineColor()), figure);
-
-						if (!figure->IsHighlighted())
-							HighlightOnlyThisFigure(figure);
-
-
+						FigureHandler::ChangeFigureOutlineColor(figure, user);
 						break;
 					}
 				}
 
 			// меняем толщину границы
 			else if (state->GetName() == "ChangingOutlineWidthState")
-				for (auto figure : _figures)
+				for (auto figure : *_figures)
 				{
 					if (figure->ContainsPoint(mouse_position))
 					{
-						app->Accept(new ChangeOutlineWidthVisitor(user->GetOutlineWidth()), figure);
-
-						if (!figure->IsHighlighted())
-							HighlightOnlyThisFigure(figure);
+						FigureHandler::ChangeFigureOutlineThickness(figure, user);
 						break;
 					}
 				}
@@ -287,14 +270,8 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			else if (state->GetName() == "CreatingRectangleState")
 			{
 				if (!IsPointInButtons(mouse_position))
-				{
-					app->SaveState();
-
-					auto rect = RectangleFactory(mouse_position, Vector2f(100, 200),
-						Color(238, 108, 77, 190), Color(0, 0, 0), 2).GetFigure();
-					ApplicationFacade::GetInstance(_window)->AddFigure(rect);
-					_figures.push_back(rect);
-				}
+					FigureHandler::CreateRectangle(mouse_position, Vector2f(100, 200),
+						Color(238, 108, 77, 190), Color(0, 0, 0), 2);
 			}
 
 			// создаем треугольник в точке нажатия
@@ -302,16 +279,12 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			{
 				if (!IsPointInButtons(mouse_position))
 				{
-					app->SaveState();
-
 					auto p1 = mouse_position;
 					auto p2 = Vector2f(p1.x + 100, p1.y);
 					auto p3 = Vector2f(p1.x, p1.y + 100);
 
-					auto triag = TriangleFactory(p1, p2, p3, Color(238, 108, 77, 190),
-						Color(0, 0, 0), 2).GetFigure();
-					ApplicationFacade::GetInstance(_window)->AddFigure(triag);
-					_figures.push_back(triag);
+					FigureHandler::CreateTriangle(p1, p2, p3, Color(238, 108, 77, 190),
+						Color(0, 0, 0), 2);
 				}
 
 			}
@@ -320,19 +293,9 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 			else if (state->GetName() == "CreatingCircleState")
 			{
 				if (!IsPointInButtons(mouse_position))
-				{
-					app->SaveState();
-
-					auto circle = CircleFactory(mouse_position, 50, Color(238, 108, 77, 190),
-						Color(0, 0, 0), 2).GetFigure();
-					ApplicationFacade::GetInstance(_window)->AddFigure(circle);
-					_figures.push_back(circle);
-				}
-
+					FigureHandler::CreateCircle(mouse_position, 50, Color(238, 108, 77, 190),
+						Color(0, 0, 0), 2);
 			}
-
-
-
 
 			// нажимаем кнопки состояний
 			for (auto btn : _stateButtons)
@@ -370,8 +333,6 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 
 			// нажимаем кнопки выбора цвета границы 
 			HandleButtonPressing(mouse_position, _outlineWidthButtons);
-
-
 
 		}
 		break;

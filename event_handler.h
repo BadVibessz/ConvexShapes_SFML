@@ -14,7 +14,7 @@ using namespace std;
 class EventHandler
 {
 private:
-	static vector<Figure*> _figures;
+	static vector<Figure*>* _figures;
 	static RenderWindow* _window;
 	static bool _is_multi_select;
 	static bool _is_moving;
@@ -31,7 +31,7 @@ private:
 	static bool IsPointInButtons(Vector2f mousePos);
 
 public:
-	static void SetShapes(vector <Figure*> figures);
+	static void SetFigures(vector <Figure*>* figures);
 	static void HandleEvent(Event e, UserHandler* user);
 
 	static void SetWindow(RenderWindow* window);

@@ -45,7 +45,7 @@ vector<Figure*> FileManager::ReadInput()
 		{
 			auto rad = MyExtensions::Split(v[2].substr(v[2].find('=') + 1), ';');
 			figure = CircleFactory(points[0], stoi(rad[0]),
-				Color(18, 130, 162, 190), Color(0, 0, 0),2).GetFigure();
+				Color(18, 130, 162, 190), Color(0, 0, 0), 2).GetFigure();
 		}
 		else if (count == 2)
 		{
@@ -73,4 +73,13 @@ void FileManager::SaveData(vector<Figure*> figures)
 		output << figure->GetType() + ": Perimeter = " +
 		to_string(figure->Perimeter()) +
 		+" Area = " + to_string(figure->Area()) << endl;
+}
+
+void FileManager::SaveData(vector<string> serializedFigures, string pathToSave)
+{
+	ofstream output;
+	output.open(pathToSave);
+
+	for (auto serializedFigure : serializedFigures)
+		output << serializedFigure << endl;
 }
