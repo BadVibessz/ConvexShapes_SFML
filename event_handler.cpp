@@ -127,7 +127,6 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 		_window->close();
 
 	auto mouse_position = _window->mapPixelToCoords(Mouse::getPosition(*_window));
-	//cout << "(" + to_string(mouse_position.x) + ", " + to_string(mouse_position.y) << endl;;
 
 	// drag state сразу выделена
 	if (_stateButtons[0]->IsPressed())
@@ -172,7 +171,6 @@ void EventHandler::HandleEvent(Event e, UserHandler* user)
 
 				if (Keyboard::isKeyPressed(Keyboard::B))
 					LoadCommand(BinaryLoader::GetInstance(), "saved.bin").Execute();
-
 			}
 
 			// undo

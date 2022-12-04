@@ -15,7 +15,6 @@ string Saver::SerializeFigureToString(Figure* figure)
 		serialized.append(to_string(rect->GetSize().x) // size
 			+ ' ' + to_string(rect->GetSize().y) + ' ');
 
-		auto zzzz = rect->GetFillColor().toInteger();
 		serialized.append(to_string(rect->GetFillColor().toInteger()) + ' '); // fill color
 		serialized.append(to_string(rect->GetOutlineColor().toInteger()) + ' '); // outline color
 		serialized.append(to_string(rect->GetOutlineThickness())); // outline thickness
@@ -45,7 +44,6 @@ string Saver::SerializeFigureToString(Figure* figure)
 	}
 	else if (figure->GetType() == "Circle")
 	{
-
 		auto circle = (CircleDecorator*)figure;
 
 		serialized.append("Circle ");

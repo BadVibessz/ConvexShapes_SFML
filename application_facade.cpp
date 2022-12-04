@@ -121,7 +121,6 @@ void ApplicationFacade::ReadInput()
 void ApplicationFacade::SaveData()
 {
 	FileManager::SaveData(this->_figures);
-
 }
 
 void ApplicationFacade::HandleEvent(Event e)
@@ -135,7 +134,6 @@ void ApplicationFacade::DrawInput()
 	//_drawer.DrawAxis(Color::Black);
 	_drawer.DrawFigures(_figures);
 	_userHandler->DrawInterface();
-
 
 	_window->display();
 }

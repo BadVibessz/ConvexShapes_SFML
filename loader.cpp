@@ -33,6 +33,7 @@ vector<Figure*> Loader::ReadFiguresFromString(string str)
 			{
 				data.push_back(ReadGroupedFromString(grouped));
 				grouped = "";
+				groupCount = 0;
 				continue;
 			}
 			groupCount--;
@@ -91,6 +92,8 @@ Figure* Loader::ReadFigureFromString(string str)
 		->SetOutlineThickness(stoi(temp[7]))
 		->Build()
 		->GetFigure();
+
+
 
 	else if (temp[0] == "Triangle")
 		return TriangleBuilder()
